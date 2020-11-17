@@ -1,24 +1,33 @@
+# import all modules
 import socket
 import random
-
+import time
+from rich.console import Console
+console = Console()
+# put a cool looking title because you can
 print ("")
-print ("   _____ _ _            _   ")
-print ("  / ____| (_)          | |  ")
-print (" | |    | |_  ___ _ __ | |_ ")
-print (" | |    | | |/ _ \ '_ \| __|")
-print (" | |____| | |  __/ | | | |_ ")
-print ("  \_____|_|_|\___|_| |_|\__|")
+print("   _____ _ _            _   ")
+print("  / ____| (_)          | |  ")
+print(" | |    | |_  ___ _ __ | |_ ")
+print(" | |    | | |/ _ \ '_ \| __|")
+print(" | |____| | |  __/ | | | |_ ")
+print("  \_____|_|_|\___|_| |_|\__|")
 print ("")
 
 HEADER = 64
+# input port for connection
 PORT = input("Input port >> ")
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-SERVER = '192.168.86.222'
+SERVER = input("Input the server IP: ")
 ADDR = (SERVER, int(PORT))
+
+# 192.168.56.1
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
+
+console.print("You have connected to port: " + PORT, style="bold green")
 
 Objects = ['Emu', 'Unicorn','Pineapple','Thermometre','Cucumber','Goat','Sheep','Clock','Teletubby','Chicken','Giraffe','Laptop','Paperclip','Lunchbag','Egg','Monitor','Keyboard','Password','Can','Notepad','Calander']
 Describers = ['Rotten','Smart','Deluxe','Pregnant','Handy','Amusing','Hard-To-Find','Oafish','Observant','Hushed','Tangible','Witty','Incredible','Flagrant','Upset','Jealous','Untidy','Fat','Demonic','Ugly']
@@ -34,7 +43,13 @@ def send(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
-    print("Server, " + server_user_name + " >> " + client.recv(2048).decode(FORMAT))
+    print ("")
+    # Add somma that COLOR
+    print ("Server,", end=' ')
+    console.print(" [bold cyan]" + server_user_name + "[/bold cyan] >> ", end=' ')
+    print (client.recv(2048).decode(FORMAT))
+    #console.print(f"Server, {[bold cyan]server_user_name[/bold cyan]}  >>  {client.recv(2048).decode(FORMAT)}\\")
+    print ("")
 
 while True:
 
