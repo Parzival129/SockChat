@@ -1,4 +1,4 @@
-# SockChat
+# SockChat1
 A simple python socket chat program
 
 You simply run the SockChat program and it links to the client and server programs
